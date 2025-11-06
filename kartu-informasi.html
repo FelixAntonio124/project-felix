@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kartu Fakta Menarik — Teknologi</title>
+  <style>
+    body {
+            background: #cfffff;
+            background: linear-gradient(0deg, rgba(207, 255, 255, 1) 5%, rgba(240, 248, 255, 1) 60%);
+            font-family: Arial, Helvetica, sans-serif;
+            }
+    .card-fakta {
+            max-width: 450px;
+            height: 88.5vh;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            text-align: center;
+            }
+    
+    .facts-list {
+      transition: opacity 0.2s ease, transform 0.3s ease;
+    }
+
+    .fade-out {opacity: 0;}
+    
+    h2 {font-family: "ar";
+        color:dodgerblue;
+          }
+
+    img.foto {
+        width: 390px;
+        height: 300px;
+        border-radius: 8px;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+        animation: zoomIn 0.5s
+          }
+
+      @keyframes zoomIn {
+        from {transform: scale(0.6);}
+        to {transform: scale(1);}}
+
+      @font-face {
+                font-family: "ar";
+                src: url(Arturo/Arturo-Regular\ Trial.ttf);
+            }
+
+      img.foto:hover {
+        transform: scale(1.1);}
+
+    .btn-next {background-color: #4CAF50;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  transition: transform 0.5s ease;
+          }
+    button.btn-next:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card-fakta">
+    <img class="foto" id="factImage" src="air1.jpg" />
+    <div class="content">
+      <h2>Fakta Menarik tentang Air</h2>
+      <p class="subtitle">Tahukah kamu fakta-fakta unik ini?</p>
+
+      <ul class="facts-list" id="factList">
+        <li>Air menutupi sekitar 71% permukaan Bumi.</li>
+        <li>Hanya sekitar 3% air di Bumi yang merupakan air tawar.</li>
+        <li>Tubuh manusia terdiri dari sekitar 60–70% air.</li>
+        <li>Air tidak memiliki warna, rasa, atau bau secara murni.</li>
+      </ul>
+
+      <button class="btn-next" id="nextFact">🔁 Fakta Selanjutnya</button>
+    </div>
+  </div>
+
+  <script>
+    const factData = [
+      {
+        image: "air2.jpg",
+        facts: [
+          "Air adalah satu-satunya zat alami yang dapat ditemukan dalam tiga wujud pada suhu normal:",
+          "Air saat membeku volumenya akan, bertambah itulah sebabnya es mengapung di air.",
+          "Tanpa air, manusia hanya bisa bertahan sekitar 3 hari.",
+          "Sekitar 97% air di dunia adalah air asin."
+        ]
+      },
+      {
+        image: "air3.jpg",
+        facts: [
+          "Setiap tetes air yang kita minum saat ini sudah berumur miliaran tahun.",
+          "Air adalah pelarut universal, Banyak zat bisa larut di dalamnya.",
+          "Otak manusia mengandung sekitar 75% air.",
+          "Air membantu mengatur suhu Bumi, menyerap panas di siang hari dan melepaskannya di malam hari."
+        ]
+      },
+      {
+        image: "air4.jpg",
+        facts: [
+          "Lebih banyak orang di dunia memiliki akses ke ponsel daripada ke air bersih.",
+          "Air dapat memotong batu, Dalam waktu lama, aliran air bisa membentuk lembah dan ngarai.",
+          "Air panas membeku lebih cepat daripada air dingin.",
+          "Planet lain juga memiliki air."
+        ]
+      },
+      {
+        image: "air5.jpg",
+        facts: [
+          "Air laut mengandung garam sekitar 35 gram per liter.",
+          "Tumbuhan meminum air melalui akar dan melepaskan uap air lewat daun",
+          "Air adalah sumber energi potensial,  Pembangkit listrik tenaga air (PLTA) memanfaatkan kekuatan aliran air.",
+          "3/4 air tawar di dunia berasal dari gunung es kutub."
+        ]
+      }
+    ];
+
+    const factList = document.getElementById("factList");
+    const factImage = document.getElementById("factImage");
+    const nextBtn = document.getElementById("nextFact");
+
+    nextBtn.addEventListener("click", () => {
+      factList.classList.add("fade-out");
+      setTimeout(() => {
+        const randomFact = factData[Math.floor(Math.random() * factData.length)];
+        factImage.style.opacity = 0;
+
+        setTimeout(() => {
+          factImage.src = randomFact.image;
+          factImage.style.opacity = 1;
+        }, 400);
+
+        factList.innerHTML = randomFact.facts.map(f => `<li>${f}</li>`).join("");
+        factList.classList.remove("fade-out");
+      }, 500);
+    });
+  </script>
+
+</body>
+</html>
